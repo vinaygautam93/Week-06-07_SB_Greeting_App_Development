@@ -4,7 +4,6 @@ import com.example.greetingapp.model.Greeting;
 import com.example.greetingapp.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 // Controller for greeting endpoints
 @RestController
@@ -14,10 +13,10 @@ public class GreetingController {
     @Autowired
     private GreetingService greetingService;
 
-    // Endpoint to list all greeting messages
-    @GetMapping("/all")
-    public List<Greeting> getAllGreetings() {
-        // Calling service to get all greetings
-        return greetingService.getAllGreetings();
+    // Endpoint to update a greeting message
+    @PutMapping("/update/{id}")
+    public Greeting updateGreeting(@PathVariable Long id, @RequestParam String message) {
+        // Calling service to update the greeting
+        return greetingService.updateGreeting(id, message);
     }
 }
