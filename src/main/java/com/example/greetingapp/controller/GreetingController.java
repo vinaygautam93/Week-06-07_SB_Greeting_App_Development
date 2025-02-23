@@ -1,6 +1,5 @@
 package com.example.greetingapp.controller;
 
-import com.example.greetingapp.model.Greeting;
 import com.example.greetingapp.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +12,14 @@ public class GreetingController {
     @Autowired
     private GreetingService greetingService;
 
-    // Endpoint to update a greeting message
-    @PutMapping("/update/{id}")
-    public Greeting updateGreeting(@PathVariable Long id, @RequestParam String message) {
-        // Calling service to update the greeting
-        return greetingService.updateGreeting(id, message);
+    // Endpoint to delete a greeting by ID
+    @DeleteMapping("/delete/{id}")
+    public String deleteGreeting(@PathVariable Long id) {
+        // Calling service to delete the greeting
+        if (greetingService.deleteGreeting(id)) {
+            return "Greeting with ID " + id + " deleted successfully.";
+        } else {
+            return "Greeting not found!";
+        }
     }
 }
