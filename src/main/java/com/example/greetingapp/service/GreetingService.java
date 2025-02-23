@@ -1,14 +1,21 @@
 package com.example.greetingapp.service;
 
+import com.example.greetingapp.model.Greeting;
+import com.example.greetingapp.repository.GreetingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
-// This service class contains the business logic for greeting messages
-@Service  // Marks this class as a Spring service
+// Service for business logic
+@Service
 public class GreetingService {
 
-    // Method to return a default greeting message
-    public String getGreetingMessage() {
-        // Returning a static message
-        return "Hello World!";
+    @Autowired
+    private GreetingRepository greetingRepository;
+
+    // Method to fetch all greetings
+    public List<Greeting> getAllGreetings() {
+        // Fetching all records from the database
+        return greetingRepository.findAll();
     }
 }
